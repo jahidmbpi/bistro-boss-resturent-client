@@ -1,8 +1,9 @@
 import Navbar from "../nabvar/Navbar";
-
 import SectionTitle from "../sheard/sectionTitel/SectionTitle";
 import Banner from "./Banner";
+import Call from "./Call";
 import Catagory from "./foodCatagory/Catagory";
+import MenuBanner from "./MenuBanner";
 import SubBannerHome from "./SubBannerHome";
 
 const Home = () => {
@@ -11,11 +12,13 @@ const Home = () => {
       <Navbar></Navbar>
       <Banner></Banner>
       <SectionTitle
-        smalltitle="---From 11:00am to 10:00pm---"
+        smalltitle="From 11:00am to 10:00pm"
         bigtitle="ORDER ONLINE"
       ></SectionTitle>
       <Catagory></Catagory>
       <SubBannerHome></SubBannerHome>
+      <Call></Call>
+      <MenuBanner></MenuBanner>
     </div>
   );
 };
