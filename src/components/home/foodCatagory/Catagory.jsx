@@ -15,7 +15,7 @@ import img5 from "../../../assets/home/slide5.jpg";
 
 const Catagory = () => {
   return (
-    <div className="w-[90%] justify-between mx-auto">
+    <div className="w-[100%] justify-between mx-auto">
       <Swiper
         slidesPerView={4}
         spaceBetween={10}
