@@ -4,6 +4,7 @@ import Banner from "./Banner";
 import Call from "./Call";
 import Catagory from "./foodCatagory/Catagory";
 import MenuBanner from "./MenuBanner";
+import OurpopularMenu from "./ourpopularmenu/OurpopularMenu";
 import SubBannerHome from "./SubBannerHome";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       ></SectionTitle>
       <Catagory></Catagory>
       <SubBannerHome></SubBannerHome>
+      <OurpopularMenu></OurpopularMenu>
       <Call></Call>
       <MenuBanner></MenuBanner>
     </div>
