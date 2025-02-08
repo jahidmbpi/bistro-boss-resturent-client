@@ -3,7 +3,7 @@ import SectionTitle from "../sheard/sectionTitel/SectionTitle";
 const MenuBanner = () => {
   return (
     <div>
-      <div className="w-full relative my-14">
+      <div className="w-full relative my-14 bg-[url({fetature})]">
         <img className="object-cover h-[650px]  w-full" src={fetature} alt="" />
         <div className="inset-0 bg-gradient-to-r from-[#151515] to-[rgba(21, 21, 21, 0)] absolute"></div>
         <div className="w-[1096px] text-center items-center mx-auto absolute top-[0px] left-[112px] ">
