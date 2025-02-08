@@ -1,4 +1,4 @@
-import Navbar from "../nabvar/Navbar";
+// import Navbar from "../nabvar/Navbar";
 import SectionTitle from "../sheard/sectionTitel/SectionTitle";
 import Banner from "./Banner";
 import Call from "./Call";
@@ -15,7 +15,7 @@ const Home = () => {
       <Helmet>
         <title>Bistro boss || Home</title>
       </Helmet>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar> */}
       <Banner></Banner>
       <SectionTitle
         smalltitle="From 11:00am to 10:00pm"
