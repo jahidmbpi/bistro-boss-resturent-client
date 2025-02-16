@@ -21,7 +21,7 @@ const Navbar = () => {
               <Link to="/menu" className="px-3 uppercase">
                 Our Menu
               </Link>
-              <Link to="/shop" className="px-3">
+              <Link to="/ourshop" className="px-3">
                 Our Shop
               </Link>
               <Link to="/signout" className="px-3">

@@ -1,5 +1,5 @@
 // import Navbar from "../nabvar/Navbar";
-import OurMenuBanner from "./ourMenuBanner/SheardBanner";
+
 import MenuCatagory from "../sheard/Menucatagory/MenuCatagory";
 import UseMenu from "../sheard/UseMenu/UseMenu";
 import SectionTitle from "../sheard/sectionTitel/SectionTitle";
@@ -8,6 +8,8 @@ import desertimg from "../../assets/menu/dessert-bg.jpeg";
 import pizzaimg from "../../assets/menu/pizza-bg.jpg";
 import saladimg from "../../assets/menu/salad-bg.jpg";
 import soupimg from "../../assets/menu/soup-bg.jpg";
+import { Helmet } from "react-helmet-async";
+import SheardBanner from "./ourMenuBanner/SheardBanner";
 
 const OurMenuPage = () => {
   const [menu] = UseMenu();
@@ -20,11 +22,14 @@ const OurMenuPage = () => {
 
   return (
     <div>
-      <OurMenuBanner
+      <Helmet>
+        <title>Bistro boss || Our Menu</title>
+      </Helmet>
+      <SheardBanner
         img={bannerimg}
         heading={"our menu"}
         subheading={"would you like to try a dish ?"}
-      ></OurMenuBanner>
+      ></SheardBanner>
 
       {/* today offer data  */}
       <div className=" space-y-10">
@@ -35,46 +40,46 @@ const OurMenuPage = () => {
         <MenuCatagory item={todayOffer}></MenuCatagory>
         {/* desert data */}
         <div className="space-y-10">
-          <OurMenuBanner
+          <SheardBanner
             img={desertimg}
             heading={"desert"}
             subheading={
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
-          ></OurMenuBanner>
+          ></SheardBanner>
           <MenuCatagory item={dessertData}></MenuCatagory>
         </div>
         {/* pizza */}
         <div className="space-y-10">
-          <OurMenuBanner
+          <SheardBanner
             img={pizzaimg}
             heading={"pizza"}
             subheading={
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
-          ></OurMenuBanner>
+          ></SheardBanner>
           <MenuCatagory item={pizzadata}></MenuCatagory>
         </div>
         {/* salad */}
         <div className="space-y-10">
-          <OurMenuBanner
+          <SheardBanner
             img={saladimg}
             heading={"salad"}
             subheading={
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
-          ></OurMenuBanner>
+          ></SheardBanner>
           <MenuCatagory item={saladData}></MenuCatagory>
         </div>
         {/* .......... */}
         <div className="space-y-10">
-          <OurMenuBanner
+          <SheardBanner
             img={soupimg}
             heading={"soup"}
             subheading={
               "Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             }
-          ></OurMenuBanner>
+          ></SheardBanner>
           <MenuCatagory item={soupData}></MenuCatagory>
         </div>
       </div>
