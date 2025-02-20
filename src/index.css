@@ -1,2 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* .react-tabs__tab-list {
+  border-bottom: none !important;
+}
+
+.react-tabs__tab {
+  border: none !important;
+  outline: none !important;
+  background-color: none !important;
+} */
