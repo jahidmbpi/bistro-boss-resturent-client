@@ -1,50 +1,54 @@
-import { FaLocationDot } from "react-icons/fa6";
-import SectionTitle from "../../sheard/sectionTitel/SectionTitle";
-import { FiPhoneCall } from "react-icons/fi";
-import { MdAccessTimeFilled } from "react-icons/md";
-
 const ContactFrom = () => {
   return (
     <div>
-      <SectionTitle
-        smalltitle="visite us "
-        bigtitle="our location"
-      ></SectionTitle>
-      <div className="flex space-x-5">
-        <div className="w-[424px] h-[300px]  border-2 shadow-2xl relative p-6">
-          <div className="text-center w-full h-full shadow-2xl bg-[#f3f3f3]  flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-bold uppercase ">phone</h2>
-            <p>+38 (012) 34 56 789</p>
-          </div>
-          <div className=" w-full h-[80px] flex bg-[#d1a054] absolute top-0 right-0 items-center justify-center">
-            <div className=" text-center items-center mx-auto">
-              <FiPhoneCall />
+      <div className="card bg-[#F3F3F3] p-[70px] w-full shrink-0 shadow-2xl mb-[130px]">
+        <form className="card-body">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="form-control">
+              <fieldset className="fieldset">
+                <label>name</label>
+                <input
+                  type="text"
+                  className="input w-full"
+                  placeholder="Type here"
+                />
+              </fieldset>
+            </div>
+            <div className="">
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">What is your name?</legend>
+                <input
+                  type="text"
+                  className="input w-full"
+                  placeholder="Type here"
+                />
+              </fieldset>
+            </div>
+            <div className="form-control col-span-2 w-full">
+              <fieldset className="fieldset">
+                <label>name</label>
+                <input
+                  type="text"
+                  className="input w-full"
+                  placeholder="Type here"
+                />
+              </fieldset>
+            </div>
+            <div className="lg:col-span-2 text-start">
+              <textarea
+                placeholder="Enter your message here..."
+                name="masage"
+                className="w-full h-[200px] rounded-2xl bg-[#FFFFFF] text-start p-4"
+                required
+              />
             </div>
           </div>
-        </div>
-        <div className="w-[424px] h-[300px]  border-2 shadow-2xl relative p-6">
-          <div className="text-center w-full h-full shadow-2xl bg-[#f3f3f3]  flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-bold uppercase ">ADDRESS</h2>
-            <p>+38 (012) 34 56 789</p>
+          <div className="form-control mt-6 w-full">
+            <button className="btn w-full bg-[#FF3811] capitalize">
+              order confrim
+            </button>
           </div>
-          <div className=" w-full h-[80px] flex bg-[#d1a054] absolute top-0 right-0 items-center justify-center">
-            <div className=" text-center items-center mx-auto">
-              <FaLocationDot />
-            </div>
-          </div>
-        </div>
-        <div className="w-[424px] h-[300px]  border-2 shadow-2xl relative p-6">
-          <div className="text-center w-full h-full shadow-2xl bg-[#f3f3f3]  flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-bold uppercase ">WORKING HOURS</h2>
-            <p>Mon - Fri: 08:00 - 22:00</p>
-            <p>Sat - Sun: 10:00 - 23:00</p>
-          </div>
-          <div className=" w-full h-[80px] flex bg-[#d1a054] absolute top-0 right-0 items-center justify-center">
-            <div className=" text-center items-center mx-auto">
-              <MdAccessTimeFilled />
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   );
