@@ -24,8 +24,11 @@ const Navbar = () => {
               <Link to="/ourshop" className="px-3">
                 Our Shop
               </Link>
-              <Link to="/signout" className="px-3">
+              <Link to="/register" className="px-3">
                 Sign Out
+              </Link>
+              <Link to="/login" className="px-3">
+                logIn
               </Link>
             </div>
           </div>
