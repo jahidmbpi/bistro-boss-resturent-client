@@ -1,6 +1,32 @@
+import toast from "react-hot-toast";
 import bg from "../../../assets/others/authentication.png";
 import img1 from "../../../assets/others/authentication1.png";
+import { AuthContext } from "../../provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 const Register = () => {
+  const { RegisterUSer } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handelregister = (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const email = from.email.value;
+    const password = from.password.value;
+    console.log(email, password);
+    RegisterUSer(email, password)
+      .then((res) => {
+        console.log(res.user);
+        console.log("User Logged In Successfully");
+        toast.success("singh In Successfully ");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
+  };
   return (
     <div
       className="min-h-screen w-full flex items-center justify-center"
@@ -19,7 +45,10 @@ const Register = () => {
           </div>
           <div className="w-[536px] p-10 ">
             <h2 className="text-center text-3xl font-bold">register</h2>
-            <div className="w-full flex flex-col space-y-5">
+            <form
+              onSubmit={handelregister}
+              className="w-full flex flex-col space-y-5"
+            >
               <div className="w-full">
                 <label>Email</label>
                 <input
@@ -60,7 +89,7 @@ const Register = () => {
                 {" "}
                 register
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -1,16 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import bg from "../../../assets/others/authentication.png";
 import img1 from "../../../assets/others/authentication1.png";
-// import {
-//   loadCaptchaEnginge,
-//   LoadCanvasTemplate,
-//   validateCaptcha,
-// } from "react-simple-captcha";
+import toast, { Toaster } from "react-hot-toast";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 import { AuthContext } from "../../provider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const LogIn = () => {
-  // const [captchaInput, setCaptchaInput] = useState("");
+  const [captchaInput, setCaptchaInput] = useState("");
   const { logInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // Handle form submission
   const handelLogin = (e) => {
@@ -23,25 +26,29 @@ const LogIn = () => {
       .then((res) => {
         console.log(res.user);
         console.log("User Logged In Successfully");
+        toast.success("singh In Successfully ");
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       })
       .catch((error) => {
         const errorMessage = error.message;
         console.log(errorMessage);
       });
 
-    // if (validateCaptcha(captchaInput)) {
-    //   alert("Captcha Matched");
-    // } else {
-    //   alert("Captcha Does Not Match");
-    // }
+    if (validateCaptcha(captchaInput)) {
+      alert("Captcha Matched");
+    } else {
+      alert("Captcha Does Not Match");
+    }
   };
-  // useEffect(() => {
-  //   loadCaptchaEnginge(6);
-  // }, []);
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
-  // const handleCaptchaChange = (e) => {
-  //   setCaptchaInput(e.target.value);
-  // };
+  const handleCaptchaChange = (e) => {
+    setCaptchaInput(e.target.value);
+  };
 
   return (
     <div
@@ -83,15 +90,15 @@ const LogIn = () => {
               </div>
               <div className="w-full">
                 <label>Captcha</label>
-                {/* <LoadCanvasTemplate /> */}
+                <LoadCanvasTemplate />
               </div>
               <div className="w-full">
                 <label>Type Captcha</label>
                 <input
                   type="text"
                   id="user_captcha_input"
-                  // value={captchaInput}
-                  // onChange={handleCaptchaChange}
+                  value={captchaInput}
+                  onChange={handleCaptchaChange}
                   placeholder="Type here"
                   className="input input-bordered input-primary w-full"
                 />
@@ -106,6 +113,7 @@ const LogIn = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
