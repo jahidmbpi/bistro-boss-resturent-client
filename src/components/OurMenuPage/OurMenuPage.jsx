@@ -12,13 +12,13 @@ import { Helmet } from "react-helmet-async";
 import SheardBanner from "./ourMenuBanner/SheardBanner";
 
 const OurMenuPage = () => {
-  const [menu] = UseMenu();
+  const menu = UseMenu();
 
-  const todayOffer = menu.filter((item) => item.category === "offered");
-  const dessertData = menu.filter((item) => item.category === "dessert");
-  const pizzadata = menu.filter((item) => item.category === "pizza");
-  const saladData = menu.filter((item) => item.category === "salad");
-  const soupData = menu.filter((item) => item.category === "soup");
+  const todayOffer = menu?.filter((item) => item.category === "offered");
+  const dessertData = menu?.filter((item) => item.category === "dessert");
+  const pizzadata = menu?.filter((item) => item.category === "pizza");
+  const saladData = menu?.filter((item) => item.category === "salad");
+  const soupData = menu?.filter((item) => item.category === "soup");
 
   return (
     <div>

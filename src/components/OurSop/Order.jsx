@@ -1,26 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderTab from "../sheard/orderTab/OrderTab";
-import UseMenu from "../sheard/UseMenu/UseMenu";
+
+import axios from "axios";
 
 const Order = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [tabdata, setTabdata] = useState([]);
+  const [Catagory, setCatagory] = useState("salad");
+  const [totaldata, Settotaldata] = useState([]);
 
-  const [menu] = UseMenu();
+  const itemPerPage = 6;
+  const totalPage = Math.ceil(totaldata.length / itemPerPage);
+  console.log("total page", totalPage);
+  const [currentPage, setCurrentPage] = useState(0);
+  console.log("current page", currentPage);
 
-  // Filter menu items by category
-  const drinksData = menu.filter((item) => item.category === "drinks");
-  const dessertData = menu.filter((item) => item.category === "dessert");
-  const pizzaData = menu.filter((item) => item.category === "pizza");
-  const saladData = menu.filter((item) => item.category === "salad");
-  const soupData = menu.filter((item) => item.category === "soup");
+  useEffect(() => {
+    if (Catagory) {
+      axios
+        .get(`http://localhost:5000/menu?category=${Catagory}`)
+        .then((res) => {
+          Settotaldata(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }
+  }, [Catagory]);
+
+  useEffect(() => {
+    if (Catagory) {
+      axios
+        .get(
+          `http://localhost:5000/menu?category=${Catagory}&currentPage=${currentPage}&itemPerPage=${itemPerPage}`
+        )
+        .then((res) => {
+          setTabdata(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    }
+  }, [Catagory, currentPage]);
 
   // Tab data
   const tabs = [
-    { label: "Salad", data: saladData },
-    { label: "Pizza", data: pizzaData },
-    { label: "Soup", data: soupData },
-    { label: "Dessert", data: dessertData },
-    { label: "Drinks", data: drinksData },
+    { label: "Salad" },
+    { label: "Pizza" },
+    { label: "Soup" },
+    { label: "Dessert" },
+    { label: "Drinks" },
   ];
 
   return (
@@ -30,7 +59,11 @@ const Order = () => {
         {tabs.map((tab, index) => (
           <button
             key={index}
-            onClick={() => setTabIndex(index)}
+            onClick={() => {
+              setTabIndex(index);
+              setCatagory(tab.label.toLowerCase());
+              setCurrentPage(0);
+            }}
             className={`px-6 py-2 rounded-lg transition-all duration-300 ${
               tabIndex === index
                 ? "bg-red-500 cursor-pointer text-white shadow-lg"
@@ -41,7 +74,6 @@ const Order = () => {
           </button>
         ))}
       </div>
-
       {/* Tab Content */}
       <div className="mt-6">
         {tabs.map((tab, index) => (
@@ -51,8 +83,20 @@ const Order = () => {
               tabIndex === index ? "block" : "hidden"
             } animate-fade-in`}
           >
-            <OrderTab items={tab.data} />
+            <OrderTab items={tabdata} />
           </div>
+        ))}
+      </div>
+      <div className="flex justify-center gap-4 mt-8">
+        {[...Array(totalPage).keys()].map((index) => (
+          <button
+            style={currentPage === index ? { backgroundColor: "green" } : {}}
+            onClick={() => setCurrentPage(index)}
+            className="btn btn-primary"
+            key={index}
+          >
+            {index}
+          </button>
         ))}
       </div>
     </div>

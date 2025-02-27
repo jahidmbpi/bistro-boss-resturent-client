@@ -1,16 +1,23 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const UseMenu = () => {
-  const [menu, setMenu] = useState([]);
+  const [menu, setMenu] = useState([]); // ✅ প্রথমে খালি অ্যারে রাখলাম
+
   useEffect(() => {
-    fetch("menu.json")
-      .then((data) => data.json())
-      .then((data) => {
-        setMenu(data);
+    axios
+      .get("http://localhost:5000/almenu")
+
+      .then((res) => {
+        setMenu(res.data);
+        console.log("Fetched Menu:", res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching menu:", error);
       });
   }, []);
 
-  return [menu];
+  return menu;
 };
 
 export default UseMenu;
