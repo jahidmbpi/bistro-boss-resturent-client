@@ -4,6 +4,8 @@ import img1 from "../../../assets/others/authentication1.png";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import moment from "moment/moment";
+import axios from "axios";
 const Register = () => {
   const { RegisterUSer } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -12,11 +14,27 @@ const Register = () => {
     const from = e.target;
     const email = from.email.value;
     const password = from.password.value;
+    const name = from.name.value;
+    const photo = from.photo.value;
+    const creationTime = moment().format("MMMM D, YYYY h:mm A");
+    const registerUser = { email, name, photo, creationTime };
+
+    console.log(registerUser);
+
     console.log(email, password);
     RegisterUSer(email, password)
       .then((res) => {
         console.log(res.user);
-        console.log("User Logged In Successfully");
+        axios
+          .post("http://localhost:5000/addUser", registerUser)
+          .then((res) => {
+            console.log(res.data);
+            console.log(" user save in database");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
         toast.success("singh In Successfully ");
         setTimeout(() => {
           navigate("/login");
@@ -50,6 +68,15 @@ const Register = () => {
               className="w-full flex flex-col space-y-5"
             >
               <div className="w-full">
+                <label>name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  className="input input-bordered input-primary w-full"
+                />
+              </div>
+              <div className="w-full">
                 <label>Email</label>
                 <input
                   type="email"
@@ -64,6 +91,15 @@ const Register = () => {
                   type="password"
                   name="password"
                   placeholder="Enter password"
+                  className="input input-bordered input-primary w-full"
+                />
+              </div>
+              <div className="w-full">
+                <label>photo</label>
+                <input
+                  type="text"
+                  name="photo"
+                  placeholder="Enter photo"
                   className="input input-bordered input-primary w-full"
                 />
               </div>
