@@ -1,24 +1,41 @@
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 /* eslint-disable react/prop-types */
 const Foodcard = ({ item }) => {
-  const { name, image, recipe } = item;
+  console.log(item);
+  const { name, image, recipe, _id } = item;
+  console.log(_id);
+
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const foodItem = {
+    name,
+    image,
+    recipe,
+    menuId: _id,
+    userEmail: user?.email,
+  };
 
   const handleAddCard = (food) => {
     console.log(food);
-
     if (!user) {
       return navigate("/login", {
         state: { from: location },
         replace: true,
       });
     } else {
-      console.log("Added to cart");
+      axios
+        .post("http://localhost:5000/addCard", foodItem)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -32,7 +49,9 @@ const Foodcard = ({ item }) => {
         <p className="text-start">{recipe}</p>
         <div className="">
           <button
-            onClick={() => handleAddCard(item)}
+            onClick={() => {
+              handleAddCard(foodItem);
+            }}
             className="btn btn-primary"
           >
             Add to card
