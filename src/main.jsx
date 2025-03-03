@@ -12,7 +12,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
-        <div className="max-w-[1300px] mx-auto">
+        <div className="max-w-[1500px] mx-auto">
           <AuthProvider>
             <RouterProvider router={router} />
           </AuthProvider>

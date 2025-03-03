@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 /* eslint-disable react/prop-types */
 const Foodcard = ({ item }) => {
   console.log(item);
-  const { name, image, recipe, _id } = item;
+  const { name, image, recipe, _id, price } = item;
   console.log(_id);
 
   const { user } = useContext(AuthContext);
@@ -18,6 +19,7 @@ const Foodcard = ({ item }) => {
     recipe,
     menuId: _id,
     userEmail: user?.email,
+    price,
   };
 
   const handleAddCard = (food) => {
@@ -32,6 +34,11 @@ const Foodcard = ({ item }) => {
         .post("http://localhost:5000/addCard", foodItem)
         .then((res) => {
           console.log(res.data);
+          Swal.fire({
+            title: "data added succefully",
+            icon: "success",
+            draggable: true,
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -52,7 +59,7 @@ const Foodcard = ({ item }) => {
             onClick={() => {
               handleAddCard(foodItem);
             }}
-            className="btn btn-primary"
+            className="btn btn-primary border-b-2 border-amber-600"
           >
             Add to card
           </button>
