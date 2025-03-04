@@ -8,7 +8,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../provider/AuthProvider";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
@@ -117,6 +117,14 @@ const LogIn = () => {
                   Log in
                 </button>
               </form>
+              <p className="">
+                new in bistroboss...{" "}
+                <Link to="/register">
+                  <span className="text-blue-700 ml-2 font-bold">
+                    please register
+                  </span>
+                </Link>
+              </p>
             </div>
           </div>
         </div>

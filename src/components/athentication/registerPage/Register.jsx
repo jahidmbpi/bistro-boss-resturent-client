@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import bg from "../../../assets/others/authentication.png";
 import img1 from "../../../assets/others/authentication1.png";
 import { AuthContext } from "../../provider/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import moment from "moment/moment";
 import axios from "axios";
@@ -131,6 +131,14 @@ const Register = () => {
                   register
                 </button>
               </form>
+              <p className="">
+                already have an account..{" "}
+                <Link to="/login">
+                  <span className="text-blue-700 ml-2 font-bold">
+                    please log in
+                  </span>
+                </Link>
+              </p>
             </div>
           </div>
         </div>

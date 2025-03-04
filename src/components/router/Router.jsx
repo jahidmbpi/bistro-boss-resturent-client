@@ -13,6 +13,12 @@ import Bookings from "../deshbrdComponents/myBooking/Bookings";
 import Rservation from "../deshbrdComponents/reservation/Rservation";
 import PayHistrory from "../deshbrdComponents/paymentHistory/PayHistrory";
 import Review from "../deshbrdComponents/addReview/Review";
+import AdminHome from "../deshbrdComponents/adminComponents/adminHome/AdminHome";
+import ManageItem from "../deshbrdComponents/adminComponents/manageItem/ManageItem";
+import AddItem from "../deshbrdComponents/adminComponents/addItem/AddItem";
+import AllUser from "../deshbrdComponents/adminComponents/allUser/AllUser";
+import PrivateAdmin from "../privateRoute/privateAdmin/PrivateAdmin";
+import ManageBooking from "../deshbrdComponents/adminComponents/manageBooking/ManageBooking";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +78,46 @@ export const router = createBrowserRouter([
       {
         path: "review",
         element: <Review />,
+      },
+      {
+        path: "adminhome",
+        element: (
+          <PrivateAdmin>
+            <AdminHome></AdminHome>
+          </PrivateAdmin>
+        ),
+      },
+      {
+        path: "manageitemadmin",
+        element: (
+          <PrivateAdmin>
+            <ManageItem></ManageItem>
+          </PrivateAdmin>
+        ),
+      },
+      {
+        path: "additemadmin",
+        element: (
+          <PrivateAdmin>
+            <AddItem></AddItem>
+          </PrivateAdmin>
+        ),
+      },
+      {
+        path: "managebookingadmin",
+        element: (
+          <PrivateAdmin>
+            <ManageBooking></ManageBooking>
+          </PrivateAdmin>
+        ),
+      },
+      {
+        path: "alluseradmin",
+        element: (
+          <PrivateAdmin>
+            <AllUser></AllUser>
+          </PrivateAdmin>
+        ),
       },
     ],
   },

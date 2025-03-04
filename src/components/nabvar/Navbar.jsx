@@ -8,7 +8,6 @@ import { TiShoppingCart } from "react-icons/ti";
 import UseCard from "../sheard/useCard/UseCard";
 const Navbar = () => {
   const { user } = useContext(AuthContext);
-  // console.log(user);
   const crurrentUserEmail = user?.email;
   console.log(crurrentUserEmail);
   // const [saveUser, setSaveUser] = useState();
