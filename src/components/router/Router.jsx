@@ -19,6 +19,7 @@ import AddItem from "../deshbrdComponents/adminComponents/addItem/AddItem";
 import AllUser from "../deshbrdComponents/adminComponents/allUser/AllUser";
 import PrivateAdmin from "../privateRoute/privateAdmin/PrivateAdmin";
 import ManageBooking from "../deshbrdComponents/adminComponents/manageBooking/ManageBooking";
+import UpdateItem from "../deshbrdComponents/adminComponents/manageItem/UpdateItem";
 
 export const router = createBrowserRouter([
   {
@@ -118,6 +119,10 @@ export const router = createBrowserRouter([
             <AllUser></AllUser>
           </PrivateAdmin>
         ),
+      },
+      {
+        path: "update/:id",
+        element: <UpdateItem></UpdateItem>,
       },
     ],
   },

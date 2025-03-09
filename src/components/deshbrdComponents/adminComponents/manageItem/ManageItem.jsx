@@ -3,6 +3,8 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import { data, Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageItem = () => {
   const FetchMenu = async () => {
@@ -21,6 +23,38 @@ const ManageItem = () => {
     queryFn: FetchMenu,
   });
   console.log(allmenu, isLoading, error);
+  const handeledelete = (id) => {
+    console.log("Deleting ID:", id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/deletemenu/${id}`)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.deletedCount > 0) {
+              console.log("Data deleted successfully");
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+            }
+            refetch();
+          })
+          .catch((error) => {
+            console.log("Delete Error:", error);
+          });
+      }
+    });
+  };
 
   if (isLoading) {
     return (
@@ -82,12 +116,17 @@ const ManageItem = () => {
                   <h2 className="text-[18px]">${item.price}</h2>
                 </td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">
-                    <FaRegEdit className="text-[22px]" />
-                  </button>
+                  <Link to={`/dashboard/update/${item._id}`}>
+                    <button className="btn btn-ghost btn-xs">
+                      <FaRegEdit className="text-[22px]" />
+                    </button>
+                  </Link>
                 </th>
                 <th>
-                  <MdOutlineDeleteOutline className="text-[22px]" />
+                  <MdOutlineDeleteOutline
+                    onClick={() => handeledelete(item._id)}
+                    className="text-[22px]"
+                  />
                 </th>
               </tr>
             ))}
