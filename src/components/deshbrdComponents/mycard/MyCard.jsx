@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import UseCard from "../../sheard/useCard/UseCard";
 import { AiOutlineDelete } from "react-icons/ai";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const MyCard = () => {
   const [data, isLoading, refetch] = UseCard();
@@ -65,7 +66,17 @@ const MyCard = () => {
       <div className="flex justify-evenly">
         <h2 className="text-xl font-bold">Item: {data?.length}</h2>
         <h2 className="text-xl font-bold">Total Price: ${formattedPrice}</h2>
-        <button className="btn btn-primary hover:bg-green-700">Payment</button>
+        {data.length ? (
+          <Link to="/dashboard/payment">
+            <button className="btn btn-primary hover:bg-green-700">
+              Payment
+            </button>
+          </Link>
+        ) : (
+          <button disabled className="btn btn-primary hover:bg-green-700">
+            Payment
+          </button>
+        )}
       </div>
 
       <div className="overflow-x-auto mt-5">
