@@ -4,21 +4,27 @@ import { useContext, useEffect, useState } from "react";
 import UseCard from "../../sheard/useCard/UseCard";
 import axios from "axios";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const CheakoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const [data, isLoading] = UseCard();
+  const [data, isLoading, refetch] = UseCard();
+  console.log(data);
+
   const [clientSecret_key, setlientSecret_key] = useState();
-  const price = data?.reduce((total, item) => total + (item.price || 0), 0);
-  console.log(price);
+  const totalPrice = data?.reduce(
+    (total, item) => total + (item.price || 0),
+    0
+  );
+  console.log(totalPrice);
   const { user } = useContext(AuthContext);
   console.log(user);
 
   useEffect(() => {
-    if (price) {
+    if (totalPrice) {
       axios
-        .post("http://localhost:5000/create-payment-intent", { price })
+        .post("http://localhost:5000/create-payment-intent", { totalPrice })
         .then((res) => {
           console.log("hello data", res.data.clientSecret);
           setlientSecret_key(res.data.clientSecret);
@@ -27,7 +33,7 @@ const CheakoutForm = () => {
           console.log(error);
         });
     }
-  }, [price]);
+  }, [totalPrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -65,6 +71,29 @@ const CheakoutForm = () => {
       console.log("paymentIntent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         console.log(paymentIntent.id);
+      }
+      if (paymentIntent.id) {
+        const paymentInfo = {
+          email: user.email,
+          price: totalPrice,
+          transactionId: paymentIntent.id,
+          date: new Date(),
+          menuId: data.map((item) => item.menuId),
+          cardId: data.map((item) => item._id),
+          status: "pending",
+        };
+        console.log(paymentInfo);
+        axios
+          .post("http://localhost:5000/payments", paymentInfo)
+          .then((res) => {
+            console.log(res.data);
+            Swal.fire({
+              title: "order comfrim success",
+              icon: "success",
+              draggable: true,
+            });
+            refetch();
+          });
       }
     }
   };
