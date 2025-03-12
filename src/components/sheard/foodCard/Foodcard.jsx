@@ -3,6 +3,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import UseCard from "../useCard/UseCard";
 
 /* eslint-disable react/prop-types */
 const Foodcard = ({ item }) => {
@@ -13,6 +14,8 @@ const Foodcard = ({ item }) => {
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [data, isLoading, error, refetch] = UseCard();
+  console.log(data, isLoading, error);
   const foodItem = {
     name,
     image,
@@ -39,6 +42,7 @@ const Foodcard = ({ item }) => {
             icon: "success",
             draggable: true,
           });
+          refetch();
         })
         .catch((error) => {
           console.log(error);

@@ -6,26 +6,13 @@ import { signOut } from "firebase/auth";
 import auth from "../../../firebase.config";
 import { TiShoppingCart } from "react-icons/ti";
 import UseCard from "../sheard/useCard/UseCard";
+import UseAdmin from "../hook/UseAdmin";
 const Navbar = () => {
   const { user } = useContext(AuthContext);
   const crurrentUserEmail = user?.email;
   console.log(crurrentUserEmail);
-  // const [saveUser, setSaveUser] = useState();
-  // console.log(saveUser);
+
   const [data] = UseCard();
-
-  // useEffect(() => {
-  //   if (crurrentUserEmail) {
-  //     axios
-  //       .get(`http://localhost:5000/user?email=${crurrentUserEmail}`)
-  //       .then((res) => {
-  //         console.log(res.data);
-  //         setSaveUser(res.data);
-  //       })
-  //       .catch((err) => console.error("Error fetching user:", err));
-  //   }
-  // }, [crurrentUserEmail]);
-
   const handelSinghOut = () => {
     signOut(auth)
       .then(() => {
@@ -35,6 +22,8 @@ const Navbar = () => {
         console.log(error);
       });
   };
+  const { isAdmin } = UseAdmin();
+  console.log(isAdmin);
   return (
     <div>
       <nav className="mx-auto w-full">
@@ -50,9 +39,15 @@ const Navbar = () => {
               <Link to="/contact" className="px-3">
                 Contact
               </Link>
-              <Link to="/dashboard" className="px-3">
-                Dashboard
-              </Link>
+              {user && (
+                <Link
+                  to={isAdmin ? "/dashboard/adminhome" : "/dashboard/userhome"}
+                  className="px-3"
+                >
+                  Dashboard
+                </Link>
+              )}
+
               <Link to="/menu" className="px-3 uppercase">
                 Our Menu
               </Link>
@@ -61,7 +56,10 @@ const Navbar = () => {
                 Our Shop
               </Link>
 
-              <Link to="/dashboard" className="flex items-center relative">
+              <Link
+                to="/dashboard/mycard"
+                className="flex items-center relative"
+              >
                 <TiShoppingCart className="text-3xl" />
                 <div className="badge badge-sm badge-secondary absolute -top-2 -right-5">
                   +{data?.length}

@@ -5,8 +5,10 @@ import UseCard from "../../sheard/useCard/UseCard";
 import axios from "axios";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheakoutForm = () => {
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [data, isLoading, refetch] = UseCard();
@@ -92,6 +94,7 @@ const CheakoutForm = () => {
               icon: "success",
               draggable: true,
             });
+            navigate("/dashboard/paymenthistory");
             refetch();
           });
       }

@@ -3,7 +3,6 @@ import UseCard from "../../sheard/useCard/UseCard";
 import { AiOutlineDelete } from "react-icons/ai";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
 const MyCard = () => {
   const [data, isLoading, refetch] = UseCard();
 

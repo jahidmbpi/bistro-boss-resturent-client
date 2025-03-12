@@ -65,14 +65,14 @@ const Deshbord = () => {
             <>
               {" "}
               <li className="text-black text-xl">
-                <NavLink to="/dashboard">
-                  <TiShoppingCart className="text-xl" />
-                  my card({data?.length})
+                <NavLink to="/dashboard/userhome">
+                  <FaHome /> user Home
                 </NavLink>
               </li>
               <li className="text-black text-xl">
-                <NavLink to="/dashboard/userhome">
-                  <FaHome /> user Home
+                <NavLink to="/dashboard/mycard">
+                  <TiShoppingCart className="text-xl" />
+                  my card({data?.length})
                 </NavLink>
               </li>
               <li className="text-black text-xl">

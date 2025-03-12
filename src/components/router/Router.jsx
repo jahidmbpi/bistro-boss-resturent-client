@@ -54,17 +54,18 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard", // ✅ Absolute path
-    element: <Deshbord />, // ✅ Self-closing tag
+    path: "/dashboard",
+    element: <Deshbord />,
     children: [
       {
-        index: true,
-        element: <MyCard />,
-      },
-      {
-        path: "userhome", // ✅ Correct relative path
+        path: "userhome",
         element: <UserHome />,
       },
+      {
+        path: "mycard",
+        element: <MyCard />,
+      },
+
       {
         path: "booking",
         element: <Bookings />,

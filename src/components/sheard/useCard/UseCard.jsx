@@ -5,7 +5,8 @@ import { AuthContext } from "../../provider/AuthProvider";
 const UseCard = () => {
   const { user } = useContext(AuthContext);
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["card"],
+    queryKey: ["card", user?.email],
+    enabled: !!user?.email,
     queryFn: async () => {
       const result = await fetch(
         `http://localhost:5000/cards?email=${user.email}`
@@ -18,7 +19,7 @@ const UseCard = () => {
   console.log("Loading:", isLoading);
   console.log("Error:", error);
 
-  return [data, isLoading, refetch];
+  return [data, isLoading, error, refetch];
 };
 
 export default UseCard;
